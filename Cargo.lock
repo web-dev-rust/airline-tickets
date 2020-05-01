@@ -1119,6 +1119,7 @@ version = "0.1.0"
 dependencies = [
  "actix-rt",
  "actix-web",
+ "bytes",
  "juniper",
  "serde",
  "serde_derive",

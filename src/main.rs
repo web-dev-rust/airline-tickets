@@ -6,6 +6,7 @@ use actix_web::{web, App, HttpServer};
 
 mod handlers;
 mod schemas;
+#[cfg(test)] mod test;
 
 use crate::handlers::routes;
 use crate::schemas::{create_schema, Schema};

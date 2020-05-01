@@ -8,6 +8,10 @@ impl QueryRoot {
     fn ping() -> FieldResult<String> {
         Ok(String::from("pong"))
     }
+
+    fn bestPrices(departure: String, origin: String, destinantion: String) -> FieldResult<String> {
+         Ok(String::from("test"))
+    }
 }
 
 pub struct MutationRoot;
