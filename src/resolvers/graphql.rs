@@ -1,3 +1,5 @@
+use crate::core::error;
+use crate::schema::errors::InputError;
 use juniper::FieldResult;
 use juniper::RootNode;
 
@@ -9,8 +11,15 @@ impl QueryRoot {
         Ok(String::from("pong"))
     }
 
-    fn bestPrices(departure: String, origin: String, destinantion: String) -> FieldResult<String> {
-         Ok(String::from("test"))
+    fn bestPrices(
+        departure: String,
+        origin: String,
+        destination: String,
+    ) -> Result<String, InputError> {
+        match error::iata_format(&origin, &destination) {
+            Err(e) => Err(e),
+            Ok(_) => Ok(String::from("test")),
+        }
     }
 }
 

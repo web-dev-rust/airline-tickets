@@ -6,6 +6,8 @@ use actix_web::{web, App, HttpServer};
 
 mod boundaries;
 mod resolvers;
+mod schema;
+mod core;
 #[cfg(test)] mod test;
 
 use crate::boundaries::web::routes;
