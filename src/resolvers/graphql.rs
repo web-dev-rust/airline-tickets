@@ -19,8 +19,8 @@ pub struct MutationRoot;
 #[juniper::object]
 impl MutationRoot {}
 
-pub type Schema = RootNode<'static, QueryRoot, MutationRoot>;
+pub type Resolver = RootNode<'static, QueryRoot, MutationRoot>;
 
-pub fn create_schema() -> Schema {
-    Schema::new(QueryRoot {}, MutationRoot {})
+pub fn create_resolver() -> Resolver {
+    Resolver::new(QueryRoot {}, MutationRoot {})
 }

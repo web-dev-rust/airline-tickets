@@ -4,21 +4,21 @@ extern crate serde_json;
 
 use actix_web::{web, App, HttpServer};
 
-mod handlers;
-mod schemas;
+mod boundaries;
+mod resolvers;
 #[cfg(test)] mod test;
 
-use crate::handlers::routes;
-use crate::schemas::{create_schema, Schema};
+use crate::boundaries::web::routes;
+use crate::resolvers::graphql::{create_resolver, Resolver};
 
 
 #[actix_rt::main]
 async fn main() -> std::io::Result<()> {
-    let schema: std::sync::Arc<Schema> = std::sync::Arc::new(create_schema());
+    let resolvers: std::sync::Arc<Resolver> = std::sync::Arc::new(create_resolver());
 
     HttpServer::new(move || {
         App::new()
-            .data(schema.clone())
+            .data(resolvers.clone())
             .configure(routes)
             .default_service(web::to(|| async { "404" }))
     })

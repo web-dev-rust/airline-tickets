@@ -1,17 +1,17 @@
 #[cfg(test)]
 mod ping_readiness {
-    use crate::handlers::routes;
-    use crate::schemas::{create_schema, Schema};
+    use crate::boundaries::web::routes;
+    use crate::resolvers::graphql::{create_resolver, Resolver};
 
     use actix_web::{test, App};
     use bytes::Bytes;
 
     #[actix_rt::test]
     async fn test_ping_pong() {
-        let schema: std::sync::Arc<Schema> = std::sync::Arc::new(create_schema());
+        let resolvers: std::sync::Arc<Resolver> = std::sync::Arc::new(create_resolver());
 
         let mut app =
-            test::init_service(App::new().data(schema.clone()).configure(routes)).await;
+            test::init_service(App::new().data(resolvers.clone()).configure(routes)).await;
 
         let req = test::TestRequest::post()
             .uri("/graphql")
