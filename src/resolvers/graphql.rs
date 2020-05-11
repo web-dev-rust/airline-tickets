@@ -16,9 +16,14 @@ impl QueryRoot {
         origin: String,
         destination: String,
     ) -> Result<String, InputError> {
-        match error::iata_format(&origin, &destination) {
-            Err(e) => Err(e),
-            Ok(_) => Ok(String::from("test")),
+        match (
+            error::iata_format(&origin, &destination),
+            error::departure_date_format(&departure),
+        ) {
+            (Err(e), Err(e2)) => Err(e),
+            (Err(e), _) => Err(e),
+            (_, Err(e)) => Err(e),
+            _ => Ok(String::from("test")),
         }
     }
 }
