@@ -1,5 +1,6 @@
 use juniper::{FieldError, IntoFieldError};
 
+// fix naming
 #[derive(Debug, Clone, PartialEq)]
 pub enum InputError {
     IataFormatError,

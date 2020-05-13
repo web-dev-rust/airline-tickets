@@ -1,5 +1,6 @@
 use crate::core::error;
-use crate::schema::errors::InputError;
+use crate::resolvers::internal::best_prices_info;
+use crate::schema::{errors::InputError, model::web::BestPrices};
 use juniper::FieldResult;
 use juniper::RootNode;
 
@@ -15,7 +16,7 @@ impl QueryRoot {
         departure: String,
         origin: String,
         destination: String,
-    ) -> Result<String, InputError> {
+    ) -> Result<BestPrices, InputError> {
         match (
             error::iata_format(&origin, &destination),
             error::departure_date_format(&departure),
@@ -23,7 +24,7 @@ impl QueryRoot {
             (Err(e), Err(e2)) => Err(e),
             (Err(e), _) => Err(e),
             (_, Err(e)) => Err(e),
-            _ => Ok(String::from("test")),
+            _ => best_prices_info(departure, origin, destination),
         }
     }
 }
