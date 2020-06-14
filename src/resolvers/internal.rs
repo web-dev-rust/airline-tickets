@@ -1,5 +1,5 @@
 use crate::boundaries::http_out::best_prices;
-use crate::schema::{errors::GenericError, model::web::BestPrices};
+use crate::schema::{errors::GenericError, model::web::best_prices::BestPrices};
 
 pub fn best_prices_info(
     departure: String,

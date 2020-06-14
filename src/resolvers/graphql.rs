@@ -1,6 +1,6 @@
 use crate::core::error;
 use crate::resolvers::internal::best_prices_info;
-use crate::schema::{errors::{GenericError, InternalError}, model::web::BestPrices};
+use crate::schema::{errors::{GenericError}, model::web::best_prices::BestPrices};
 use juniper::FieldResult;
 use juniper::RootNode;
 
