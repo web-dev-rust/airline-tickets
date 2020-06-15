@@ -123,4 +123,44 @@ pub mod recommendations {
     pub struct Airline {
         marketing: Info,
     }
+
+    #[derive(Serialize, Deserialize, Debug, PartialEq, Clone, GraphQLObject)]
+    #[serde(rename_all = "camelCase")]
+    pub struct Cabin {
+        code: String,
+        display_price: f64,
+        availability_count: i32,
+        display_prices: DisplayPrice,
+        fares: Vec<Fare>
+    }
+
+    #[derive(Serialize, Deserialize, Debug, PartialEq, Clone, GraphQLObject)]
+    #[serde(rename_all = "camelCase")]
+    pub struct DisplayPrice {
+        slice: f64,
+        whole_trip: f64,
+    }
+
+    #[derive(Serialize, Deserialize, Debug, PartialEq, Clone, GraphQLObject)]
+    #[serde(rename_all = "camelCase")]
+    pub struct Fare {
+        code: String,
+        category: String,
+        fare_id: String,
+        availability_count: i32,
+        price: Price
+    }
+
+    #[derive(Serialize, Deserialize, Debug, PartialEq, Clone, GraphQLObject)]
+    pub struct Price {
+        adult: PriceInfo
+    }
+
+    #[derive(Serialize, Deserialize, Debug, PartialEq, Clone, GraphQLObject)]
+    #[serde(rename_all = "camelCase")]
+    pub struct PriceInfo {
+        amount_without_tax: f64, 
+        tax_and_fees: f64, 
+        total: f64, 
+    }
 }
