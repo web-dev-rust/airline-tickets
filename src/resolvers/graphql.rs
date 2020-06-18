@@ -1,6 +1,6 @@
 use crate::core::error;
-use crate::resolvers::internal::best_prices_info;
-use crate::schema::{errors::{GenericError}, model::web::best_prices::BestPrices};
+use crate::resolvers::internal::{best_prices_info, recommendations_info};
+use crate::schema::{errors::{GenericError}, model::web::{best_prices::BestPrices, recommendations::Recommendations}};
 use juniper::FieldResult;
 use juniper::RootNode;
 
@@ -21,6 +21,17 @@ impl QueryRoot {
         error::departure_date_format(&departure)?;
         let best_price = best_prices_info(departure, origin, destination)?;
         Ok(best_price)
+    }
+
+    fn recommendations(
+        departure: String,
+        origin: String,
+        destination: String,
+    ) -> Result<Recommendations, GenericError> {
+        error::iata_format(&origin, &destination)?;
+        error::departure_date_format(&departure)?;
+        let recommendations = recommendations_info(departure, origin, destination)?;
+        Ok(recommendations)
     }
 }
 

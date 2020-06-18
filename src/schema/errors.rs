@@ -58,13 +58,13 @@ impl IntoFieldError for GenericError {
 
 
 impl From<reqwest::Error> for GenericError {
-    fn from(e: reqwest::Error) -> Self {
+    fn from(_: reqwest::Error) -> Self {
         GenericError::InternalError(InternalError::RequestFailedError)
     }
 }
 
 impl From<serde_json::Error> for GenericError {
-    fn from(e: serde_json::Error) -> Self {
+    fn from(_: serde_json::Error) -> Self {
         GenericError::InternalError(InternalError::ResponseParseError)
     }
 }
