@@ -35,7 +35,7 @@ pub mod best_prices {
     pub struct BestPrice {
         date: String,
         available: bool,
-        price: Price,
+        price: Option<Price>,
     }
 
     #[derive(Serialize, Deserialize, Debug, PartialEq, Clone, GraphQLObject)]
